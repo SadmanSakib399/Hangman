@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #212121; /* Dark theme */
+    color: white;
+    padding: 20px;
+}
+
+.container {
+    background-color: #333; /* Slightly lighter background for container */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 700px;
+    margin: auto;
+}
+
+h1, h2 {
+    color: white; /* White color for all headings */
+    text-shadow: none; /* Remove text shadow for a clean look */
+}
+
+h2 {
+    font-size: 28px;
+    letter-spacing: 10px;
+    margin: 20px 0;
+}
+
+pre {
+    font-size: 22px;
+    line-height: 1.5;
+    color: white;
+    background-color: #424242;
+    padding: 10px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    white-space: pre-wrap; /* Preserve formatting */
+    text-align: center; /* Center the hangman stages */
+    margin: auto; /* Center alignment on the page */
+}
+
+.letters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.letters button {
+    padding: 10px 15px;
+    font-size: 18px;
+    color: white;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.letters button:hover {
+    transform: scale(1.05);
+    border-color: #4CAF50; /* Green color for hover */
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.5); /* Green shadow for hover */
+}
+
+.letters button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+a.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FF6347; /* Tomato color for button */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    outline: 2px solid #FF6347; /* Tomato color outline */
+}
+
+a.btn:hover {
+    background-color: #218838;
+}
+
+/* Game Title Styling */
+.game-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: white; /* White color for game title */
+    text-shadow: none; /* Remove text shadow for a clean look */
+    margin-bottom: 30px;
+}
+
+/* Game Over Styling */
+.game-over {
+    font-size: 40px;
+    font-weight: bold;
+    color: white; /* White color for Game Over text */
+    text-shadow: none; /* Remove text shadow for a clean look */
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="game-title">HANGMAN GAME</h1>
+
+        <!-- Display hangman stages with proper formatting -->
+        <pre>{{ stages }}</pre>
+
+        <h2>{{ " ".join(underscore_list) }}</h2>
+
+        <!-- Display hearts instead of numbers -->
+        <p>Lives Left: {{ '❤️ ' * life }}</p>
+        <p>Streak: {{ streak }}</p>
+
+        {% if game_over %}
+            <h2 class="game-over">😢 Game Over! 😢</h2>
+            <p>You gave it your all, but the stick figure took the win. Ready to take on another challenge? 🎯 Come back and play again! 😊</p>
+            <p>The word was: {{ chosen_word }}</p>
+            <a href="{{ url_for('new_game') }}" class="btn">Start New Game</a>
+        {% else %}
+            <h3>Choose a letter:</h3>
+            <form method="POST">
+                <div class="letters">
+                    <!-- Create clickable buttons for letters A-Z -->
+                    {% for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
+                        <button type="submit" name="letter" value="{{ letter }}" {% if letter in guessed_word_list %} disabled {% endif %}>
+                            {{ letter }}
+                        </button>
+                    {% endfor %}
+                </div>
+            </form>
+        {% endif %}
+    </div>
+
+</body>
+</html>
