@@ -1,104 +1,242 @@
+/* Global styling */
 body {
+    background-color: #212121;
+    color: var(--light-shadow);
     font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #212121; /* Dark theme */
-    color: white;
-    padding: 20px;
-}
-
-.container {
-    background-color: #333; /* Slightly lighter background for container */
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 700px;
-    margin: auto;
-}
-
-h1, h2 {
-    color: white; /* White color for all headings */
-    text-shadow: none; /* Remove text shadow for a clean look */
-}
-
-h2 {
-    font-size: 28px;
-    letter-spacing: 10px;
-    margin: 20px 0;
-}
-
-pre {
-    font-size: 22px;
-    line-height: 1.5;
-    color: white;
-    background-color: #424242;
-    padding: 10px;
-    border: 1px solid #888;
-    border-radius: 5px;
-    white-space: pre-wrap; /* Preserve formatting */
-    text-align: center; /* Center the hangman stages */
-    margin: auto; /* Center alignment on the page */
-}
-
-.letters {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
-.letters button {
-    padding: 10px 15px;
-    font-size: 18px;
-    color: white;
-    background-color: transparent;
-    border: 2px solid white;
+/* Container styling */
+.container {
+    text-align: center;
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+/* Game title styling */
+.wrapper {
+    background: #212121;
+    display: grid;
+    grid-template-areas: 'overlap';
+    place-content: center;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.wrapper > div {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: #363833;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.5em, 7rem, 10rem);
+    grid-area: overlap;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 4px transparent;
+}
+
+div.bg {
+    background-image: repeating-linear-gradient(105deg, 
+        var(--gold) 0%, 
+        var(--dark-shadow) 5%, 
+        var(--gold) 12%);
+    color: transparent;
+    filter: drop-shadow(5px 10px 10px black);
+    transform: scaleY(1.05);
+    transform-origin: top;
+}
+
+div.fg {
+    background-image: repeating-linear-gradient(5deg, 
+        var(--gold) 0%, 
+        var(--light-shadow) 23%, 
+        var(--gold) 31%);
+    color: #212121;
+    transform: scale(1);
+}
+
+/* Colors for the gradient effect */
+:root {
+    --gold: #468585;
+    --light-shadow: #C4DAD2;
+    --dark-shadow: #16423C;
+    --green: #229799;
+    --correct-color: #41B3A2;
+    --wrong-color: #C7253E;
+    --button-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b, 
+                        inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+    --button-border: solid var(--green) 1px;
+}
+
+/* Lives and Streak container */
+.lives-streak {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+/* Lives section */
+.lives-section, .streak-section {
+    font: 1.5rem Consolas, Courier New, monospace;
+    color: var(--green);
+}
+
+/* Hangman stage styling */
+.hangman-stage {
+    font-size: 1.3rem;
+    white-space: pre-wrap;
+    background-color: #333;
+    padding: 10px;
     border-radius: 5px;
+    margin-bottom: 20px;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Word to guess styling */
+.word-to-guess {
+    font-size: 2rem;
+    letter-spacing: 15px;
+    margin-bottom: 40px;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+/* Letter buttons styling */
+.letters {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.letter-btn {
+    height: 40px;
+    width: 90px;
+    margin: 5px;
+    background: #333;
+    justify-content: center;
     cursor: pointer;
-    outline: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-}
-
-.letters button:hover {
-    transform: scale(1.05);
-    border-color: #4CAF50; /* Green color for hover */
-    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.5); /* Green shadow for hover */
-}
-
-.letters button:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-}
-
-a.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #FF6347; /* Tomato color for button */
-    color: white;
-    text-decoration: none;
+    align-items: center;
+    font-family: Consolas, Courier New, monospace;
+    border: var(--button-border);
+    font-size: 25px;
+    color: rgb(161, 161, 161);
+    transition: 500ms;
     border-radius: 5px;
-    font-size: 18px;
-    outline: 2px solid #FF6347; /* Tomato color outline */
+    background: linear-gradient(145deg, #2e2d2d, #212121);
+    box-shadow: var(--button-shadow);
 }
 
-a.btn:hover {
-    background-color: #218838;
+/* Hover and active states */
+.letter-btn:hover {
+    box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+    color: var(--green);
+    background: linear-gradient(145deg, #222831, #1e1e1e);
+    transition: 500ms;
 }
 
-/* Game Title Styling */
-.game-title {
-    font-size: 48px;
-    font-weight: bold;
-    color: white; /* White color for game title */
-    text-shadow: none; /* Remove text shadow for a clean look */
-    margin-bottom: 30px;
+.letter-btn:active {
+    box-shadow: 1px 1px 13px #20232e, -1px -1px 33px #545b78;
+    color: #d6d6d6;
+    background: linear-gradient(145deg, #31363F, #1e1e1e);
+    transition: 100ms;
 }
 
-/* Game Over Styling */
+/* Correct and wrong guesses */
+.letter-btn.correct {
+    border-color: var(--correct-color);
+    color: var(--correct-color);
+}
+
+.letter-btn.wrong {
+    border-color: var(--wrong-color);
+    color: var(--wrong-color);
+}
+
+/* Game over section */
 .game-over {
-    font-size: 40px;
-    font-weight: bold;
-    color: white; /* White color for Game Over text */
-    text-shadow: none; /* Remove text shadow for a clean look */
+    margin-top: 15px;
+    background-color: #333;
+    border-radius: 5px;
+    /* box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); */
+    width: 100%;
+    grid-column: 1 / -1;
+    margin: 0 auto;
+}
+
+.game-over h2 {
+    font-size: 2rem;
+}
+
+.game-over p {
+    font-size: 1.1rem;
+}
+
+/* Start button */
+.start-btn {
+    height: 50px;
+    width: 180px;
+    margin: 10px 0 35px 0;
+    background: #333;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    font-family: Consolas, Courier New, monospace;
+    border: var(--button-border);
+    font-size: 20px;
+    color: rgb(161, 161, 161);
+    transition: 500ms;
+    border-radius: 5px;
+    background: linear-gradient(145deg, #2e2d2d, #212121);
+    box-shadow: var(--button-shadow);
+}
+
+/* Hover and active states for start button */
+.start-btn:hover {
+    box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+    color: var(--green);
+    background: linear-gradient(145deg, #2e2d2d, #1e1e1e);
+}
+
+.start-btn:active {
+    box-shadow: 1px 1px 13px #20232e, -1px -1px 33px #545b78;
+    color: #d6d6d6;
+    background: linear-gradient(145deg, #1b1b1b, #1e1e1e);
+    transition: 100ms;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .word-to-guess {
+        font-size: 1.8rem;
+        letter-spacing: 10px;
+    }
+    .letter-btn {
+        font-size: 0.9rem;
+    }
+    .hangman-stage {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .letter-btn {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        width: 60px;
+    }
+    .hangman-stage {
+        font-size: 1rem;
+    }
+    .word-to-guess {
+        font-size: 1.5rem;
+        letter-spacing: 8px;
+    }
 }
