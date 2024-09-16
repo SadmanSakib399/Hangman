@@ -1,44 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hangman Game</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
     <div class="container">
-        <h1 class="game-title">HANGMAN GAME</h1>
+        <!-- Title Section -->
+        <div class="wrapper">
+            <div class="bg">HANGMAN</div>
+            <div class="fg">HANGMAN</div>
+        </div>
 
-        <!-- Display hangman stages with proper formatting -->
-        <pre>{{ stages }}</pre>
+        <!-- Lives and Streak Section -->
+        <div class="lives-streak">
+            <div class="lives-section">
+                <span class="label">Lives:</span><span id="lives" class="lives">{% for _ in range(life) %}💚{% endfor %}{% for _ in range(6 - life) %}🩶{% endfor %}</span>
+            </div>            
 
-        <h2>{{ " ".join(underscore_list) }}</h2>
+            <div class="streak-section">
+                <span class="label">Streak:</span>
+                <span id="streak">{{ streak }}</span>
+            </div>
+        </div>
 
-        <!-- Display hearts instead of numbers -->
-        <p>Lives Left: {{ '❤️ ' * life }}</p>
-        <p>Streak: {{ streak }}</p>
+        <!-- Stages Section -->
+        <pre id="hangman-stage" class="hangman-stage">
+            {{ stages }}
+        </pre>
 
-        {% if game_over %}
-            <h2 class="game-over">😢 Game Over! 😢</h2>
-            <p>You gave it your all, but the stick figure took the win. Ready to take on another challenge? 🎯 Come back and play again! 😊</p>
-            <p>The word was: {{ chosen_word }}</p>
-            <a href="{{ url_for('new_game') }}" class="btn">Start New Game</a>
-        {% else %}
-            <h3>Choose a letter:</h3>
-            <form method="POST">
-                <div class="letters">
-                    <!-- Create clickable buttons for letters A-Z -->
-                    {% for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
-                        <button type="submit" name="letter" value="{{ letter }}" {% if letter in guessed_word_list %} disabled {% endif %}>
-                            {{ letter }}
-                        </button>
-                    {% endfor %}
+        <!-- Word to Guess -->
+        <div id="word-to-guess" class="word-to-guess">
+            {{ " ".join(underscore_list) }}
+        </div>
+
+        <!-- Guessing Options -->
+        <div class="letters">
+            {% if game_over %}
+                <div id="game-over" class="game-over">
+                    <h2>GAME OVER!</h2>
+                    <p>You gave it your all, but the stick figure took the win.</p>
+                    <p>Ready to take on another challenge? 🎯 Come back and play again! 😊</p>
+                    <p>The word was: {{ chosen_word }}</p>
                 </div>
-            </form>
-        {% endif %}
+            {% else %}
+                {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
+                    <form method="POST" action="/">
+                        <button type="submit" name="letter" value="{{ letter }}" class="letter-btn">{{ letter }}</button>
+                    </form>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Start New Game Button -->
+        <form action="{{ url_for('new_game') }}" method="GET">
+            <button type="submit" aria-label="Start Game" class="start-btn" id="startButton">
+                {% if game_over %}
+                    Play Again
+                {% else %}
+                    Start New Game
+                {% endif %}
+            </button>
+        </form>
     </div>
 
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
