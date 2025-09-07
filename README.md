@@ -4,6 +4,10 @@ A fun and interactive **Hangman game** built with **HTML, CSS, and Python (Flask
 The game has a **modern dark mode design**, is **fully responsive**, and works seamlessly on desktop and mobile.  
 It’s hosted on **PythonAnywhere** so you can play it online anytime!  
 
+## 🖼️ Screenshots
+
+![Hangman](images/Screenshot_hangman.png)
+
 ## ✨ Features  
 - 🕹️ Classic Hangman gameplay with word guessing  
 - ❤️ Tracks lives, streaks, and guessed letters  
