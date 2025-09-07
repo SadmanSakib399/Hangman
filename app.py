@@ -9,7 +9,7 @@ app.secret_key = 'your_secret_key'  # Needed for session handling
 
 # Reset and initialize game state
 def reset_game(reset_streak=False):
-    session['life'] = 6
+    session['life'] = 5
     session['guessed_word_list'] = []
     session['chosen_word'] = random.choice(words_list)
     session['underscore_list'] = ["_"] * len(session['chosen_word'])

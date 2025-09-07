@@ -17,7 +17,7 @@
         <!-- Lives and Streak Section -->
         <div class="lives-streak">
             <div class="lives-section">
-                <span class="label">Lives:</span><span id="lives" class="lives">{% for _ in range(life) %}💚{% endfor %}{% for _ in range(6 - life) %}🩶{% endfor %}</span>
+                <span class="label">Lives:</span><span id="lives" class="lives">{% for _ in range(life) %}💚{% endfor %}{% for _ in range(5 - life) %}🩶{% endfor %}</span>
             </div>            
 
             <div class="streak-section">
@@ -42,7 +42,7 @@
                 <div id="game-over" class="game-over">
                     <h2>GAME OVER!</h2>
                     <p>You gave it your all, but the stick figure took the win.</p>
-                    <p>Ready to take on another challenge? 🎯 Come back and play again! 😊</p>
+                    <p>Ready to take on another challenge?</p>
                     <p>The word was: {{ chosen_word }}</p>
                 </div>
             {% else %}
